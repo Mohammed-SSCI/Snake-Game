@@ -1,0 +1,60 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #282c34;
+}
+h1 {
+    top: 0%;
+    position: absolute;
+    color: #d30ba8;
+}
+h2 {
+    left: 15%;
+    position: absolute;
+    color: #d30ba8;
+}
+button {
+    border:none;
+    appearance:none;
+    outline:none;
+    display:inline-block;
+    font-size:1.5em;
+    cursor:pointer;
+    text-decoration:none;
+    padding:12px 48px 12px 48px;
+    border-radius:4px;
+    color:#ffffff;
+    background-color:#f5337d;
+    border: 2px solid #ffffff;
+   
+}
+button {   transition-duration: 0.4s; }
+button:hover {
+    font-size:1.6em;
+    background-color:#05c46b;}
+
+.game-board {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    background-color: #000000;
+    border: 2px solid #fff;
+}
+
+.snake {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #0adf3f;
+}
+
+.food {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-image: url("appleF.jpg.jpg");
+    background-size: cover;
+}
