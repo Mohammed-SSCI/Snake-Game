@@ -3,7 +3,7 @@ const boardSize = 600;
 const tileSize = 20;
 var S=0;
 var highscore=0;
-
+var audioB = new Audio('Snake Jazz.mp3');
 let snake = [
     { x: 14, y: 14 }
 ];
@@ -34,17 +34,25 @@ function changeDirection(event) {
 function gameLoop() {
     moveSnake();
     if (checkCollision()) {
-        alert('Game Over! NOOOOO  Score: '+S);
+        EndB(audioB);
+        endS();
+        setTimeout(Gameover, 1500);
+        // Gameover();
         
-        resetGame();
+        setTimeout(resetGame, 1501);
         return;
     }
-    if (checkFoodCollision()) {
-        growSnake();
-        placeFood();
-    }
+    // if (checkFoodCollision()) {
+        
+    //     growSnake();
+    //     placeFood();
+        
+    // }
     draw();
     setTimeout(gameLoop, speed);
+}
+function Gameover(){
+    alert('Game Over! NOOOOO  Score: '+S);
 }
 
 function moveSnake() {
@@ -56,20 +64,29 @@ function moveSnake() {
 function checkCollision() {
     const head = snake[0];
     if (head.x < 0 || head.x >= boardSize / tileSize || head.y < 0 || head.y >= boardSize / tileSize) {
+        direction = { x: 0, y: 0 };
         return true;
+    }
+    else if(head.x === food.x && head.y === food.y){
+        crunchS();
+        growSnake();
+        placeFood();
+        return false;
     }
     for (let i = 1; i < snake.length; i++) {
         if (snake[i].x === head.x && snake[i].y === head.y) {
+            direction = { x: 0, y: 0 };
             return true;
         }
     }
     return false;
 }
 
-function checkFoodCollision() {
-    const head = snake[0];
-    return head.x === food.x && head.y === food.y;
-}
+// function checkFoodCollision() {
+//     const head = snake[0];
+    
+//     return head.x === food.x && head.y === food.y;
+// }
 
 function growSnake() {
     snake.push({ ...snake[snake.length - 1] });
@@ -115,13 +132,46 @@ function resetGame() {
     refresh();
 
 }
+function EndB(audioB){
+    audioB.pause();
+}
+function BackgroundM(audioB){
+    audioB.loop = true;
+    audioB.play();
+    
+    }
+       
+
+    
+    
+
 function refresh(){
     location.reload();
 }
+function endS(){
+    var audioE = new Audio('mixkit-wrong-answer-fail-notification-946.mp3');
+    audioE.play();
+}
+
+function crunchS(){
+    var audio = new Audio('apple-crunch-215258.mp3');
+    audio.play();
+
+}
+
+// function loopB(){
+//     BackgroundM()
+//     setTimeout(BackgroundM(),100000)
+//     setTimeout(BackgroundM(),200000)
+//     setTimeout(BackgroundM(),300000)
+//     setTimeout(BackgroundM(),400000)
+// }
 gameBoard.style.display = 'none';
 function startgame(){
     document.getElementById("bg").style.display='none';
     gameBoard.style.display = 'block';
+    BackgroundM(audioB)
 placeFood();
 draw();
+
 setTimeout(gameLoop, speed);} 
